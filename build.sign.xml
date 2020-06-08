@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+
+<!-- 
+ ===============================================================
+  $Id: build.sign.xml,v 1.1 2005/03/26 01:59:16 hayashi_takeshi Exp $
+ ===============================================================
+-->
+<project name="build.sign" default="main" basedir=".">
+
+	<property name="workspace.dir" value=".."/>
+
+    <!-- main -->
+    <target name="main">
+        <property name="keystore" value="${workspace.dir}/com.tap.t3g.build/key/keystore"/>
+        <signjar alias="tap-t3g" storepass="password" keystore="${keystore}">
+        	<fileset dir="." includes="*.jar"/>
+        </signjar>
+    </target>
+
+    <target name="jar">
+        <jar destFile="${basedir}/lib-gen/cn.htng.www.derby.jar">
+            <fileset dir="${basedir}/bin">
+                <include name="**/*.class" />
+                <exclude name="test/*.class" />
+                <exclude name="**/*~" />
+                <exclude name="**/.svn/*.*" />
+            </fileset>
+        </jar>
+    </target>
+</project>
